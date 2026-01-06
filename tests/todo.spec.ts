@@ -36,6 +36,16 @@ test("should be able to add a todo", async ({ page, request, context }) => {
       url: "https://todo.qacart.com",
     },
   ]);
+  await page.goto("/todo/new");
+  //await page.click('[data-testid="add"]');
+  await page.locator('[data-testid="new-todo"]').fill("Learn Playwright");
+  await page.locator('[data-testid="submit-newTask"]').click();
+
+  const todoText = await page
+    .locator('[data-testid="todo-item"]')
+    .nth(0)
+    .innerText();
+  expect(todoText).toEqual("Learn Playwright");
 });
 
 test("should be able to delete a todo", async ({ page, request, context }) => {

@@ -9,13 +9,13 @@ export default class TodoApi {
   }
 
   async addTask(user: User) {
-    await this.request.post("/api/v1/tasks", {
+    return await this.request.post("/api/v1/tasks", {
       data: {
         isCompleted: false,
         item: "Learn Playwright",
       },
       headers: {
-        authorization: `Bearer ${user.getAccessToken()}`,
+        Authorization: `Bearer ${user.getAccessToken()}`,
       },
     });
   }

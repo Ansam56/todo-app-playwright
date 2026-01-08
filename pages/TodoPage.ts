@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
 
 export default class TodoPage {
   private page: Page;
@@ -10,7 +10,35 @@ export default class TodoPage {
     return '[data-testid="welcome"]';
   }
 
+  private get todoItem() {
+    return '[data-testid="todo-item"]';
+  }
+
+  private get deleteIcon() {
+    return '[data-testid="delete"]';
+  }
+
+  private get noTodosMessage() {
+    return '[data-testid="no-todos"]';
+  }
+
+  async load() {
+    await this.page.goto("/todo");
+  }
+
   getWelcomeMessage() {
     return this.page.locator(this.welcomeMessage);
+  }
+
+  async getTodoTextByIndex(index: number) {
+    return await this.page.locator(this.todoItem).nth(index).innerText();
+  }
+
+  async deleteTodoByIndex(index: number) {
+    return await this.page.locator(this.deleteIcon).nth(index).click();
+  }
+
+  getnoTodosMessage() {
+    return this.page.locator(this.noTodosMessage);
   }
 }

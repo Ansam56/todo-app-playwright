@@ -1,18 +1,11 @@
-import { faker } from "@faker-js/faker";
 import { test, expect } from "@playwright/test";
 import User from "../models/User";
-import TodoApi from "../apis/TodoApi";
 import RegisterPage from "../pages/RegisterPage";
 import NewTodoPage from "../pages/NewTodoPage";
 import TodoPage from "../pages/TodoPage";
 
 test("should be able to add a todo", async ({ page, request, context }) => {
-  const user = new User(
-    faker.person.firstName(),
-    faker.person.lastName(),
-    faker.internet.email(),
-    "Test123*"
-  );
+  const user = new User();
   const registerPage = new RegisterPage(page, request, context);
   await registerPage.registerUsingTheApi(user);
   const newTodoPage = new NewTodoPage(page);
@@ -27,12 +20,7 @@ test("should be able to add a todo", async ({ page, request, context }) => {
 });
 
 test("should be able to delete a todo", async ({ page, request, context }) => {
-  const user = new User(
-    faker.person.firstName(),
-    faker.person.lastName(),
-    faker.internet.email(),
-    "Test123*"
-  );
+  const user = new User();
   const registerPage = new RegisterPage(page, request, context);
   await registerPage.registerUsingTheApi(user);
 

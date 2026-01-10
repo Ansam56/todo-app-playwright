@@ -1,6 +1,7 @@
 import { APIRequestContext, BrowserContext, Page } from "@playwright/test";
 import User from "../models/User";
 import UserApi from "../apis/UserApi";
+import config from "../playwright.config";
 export default class RegisterPage {
   private page: Page;
   private request?: APIRequestContext;
@@ -70,17 +71,17 @@ export default class RegisterPage {
       {
         name: "access_token",
         value: access_token,
-        url: "https://todo.qacart.com",
+        url: config.use?.baseURL,
       },
       {
         name: "userID",
         value: userID,
-        url: "https://todo.qacart.com",
+        url: config.use?.baseURL,
       },
       {
         name: "firstName",
         value: firstName,
-        url: "https://todo.qacart.com",
+        url: config.use?.baseURL,
       },
     ]);
   }
